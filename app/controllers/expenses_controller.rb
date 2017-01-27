@@ -1,5 +1,5 @@
 class ExpensesController < ApplicationController
   def index
-    @tab = :expenses
+    @expenses = Expense.take(30)
   end
 end
