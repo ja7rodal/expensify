@@ -2,14 +2,14 @@
 #
 # Table name: expenses
 #
-#  id          :integer          not null, primary key
-#  concept     :string
-#  value       :decimal(, )
-#  date        :date
-#  category_id :integer
-#  type_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  concept      :string
+#  value        :decimal(, )
+#  date         :date
+#  type_expense :integer
+#  category_id  :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class Expense < ApplicationRecord
@@ -19,6 +19,6 @@ class Expense < ApplicationRecord
 	validates :value, presence: true
 	validates :date, presence: true
 	
-	enum type: [:Purchase, :Withdrawal, :Transfer, :Payment]
+	enum type_expense: [:Purchase, :Withdrawal, :Transfer, :Payment]
 	
 end
