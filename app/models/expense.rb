@@ -14,11 +14,11 @@
 
 class Expense < ApplicationRecord
   belongs_to :category
-  belongs_to :type
 	
 	validates :concept, presence: true
 	validates :value, presence: true
 	validates :date, presence: true
-
+	
+	enum type: [:Purchase, :Withdrawal, :Transfer, :Payment]
 	
 end

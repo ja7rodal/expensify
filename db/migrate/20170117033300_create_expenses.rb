@@ -4,9 +4,8 @@ class CreateExpenses < ActiveRecord::Migration[5.0]
       t.string :concept
       t.decimal :value
       t.date :date
+			t.integer :type_id
       t.references :category, foreign_key: true
-      t.references :type, foreign_key: true
-
       t.timestamps
     end
   end
