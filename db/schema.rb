@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20170117040507) do
     t.decimal  "value"
     t.date     "date"
     t.integer  "category_id"
-    t.integer  "type_id"
+    t.integer  "type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_expenses_on_category_id"
-    t.index ["type_id"], name: "index_expenses_on_type_id"
+    t.index ["type"], name: "index_expenses_on_type"
   end
 
   create_table "types", force: :cascade do |t|
