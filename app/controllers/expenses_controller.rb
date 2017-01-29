@@ -10,6 +10,12 @@ class ExpensesController < ApplicationController
 
 	def create
 		@expense = Expense.create(expense_params)
+		byebug
+		if @expense.save
+			redirect_to expenses_path, notice: "Expense successfully published"
+		else
+			render :new
+		end
 	end
 
 	def edit
@@ -23,7 +29,7 @@ class ExpensesController < ApplicationController
 
 	private
 	def expense_params
-		params.require(:expense).permit(:concept, :value, :date, :type_expense, :category )
+		params.require(:expense).permit(:concept, :value, :date, :type_expense, :category_id )
 	end
 
 end

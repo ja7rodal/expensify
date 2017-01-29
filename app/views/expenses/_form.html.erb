@@ -29,7 +29,7 @@
 					<div class="row form-group">
 						<div class="col-sm-6">
 							<%= f.label :category_id %><br>
-							<%= f.collection_select :category, Category.all, :id, :category, {}, {class: "form-control"} %>
+							<%= f.collection_select :category_id, Category.all, :id, :category, {}, {class: "form-control"} %>
 						</div>
 						<div class="col-sm-6">	
 							<%= f.label "Amount" %><br>
