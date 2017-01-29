@@ -33,7 +33,7 @@
 
 			<div class="row" style="margin-top: 20px;">
 				<div class="col-md-12">
-					<%= link_to "New Expense", new_expense_path, remote: true, class: "btn btn-success pull-left" %>
+					<%= link_to "<span class='glyphicon glyphicon-plus'> New Expense</span>".html_safe, new_expense_path, remote: true, class: "btn btn-success pull-left" %>
 					<h4 class="dropdown pull-right">
 						<button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">April 2016 <span class="caret"></span></button>
 						<ul class="dropdown-menu" role="menu">
@@ -73,8 +73,8 @@
 						<td class="text-right" style="width: 170px;">
 							<div class="amount"><%= expense.value%></div>
 							<div class="actions">
-								<a href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-								<a href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+								 <%= link_to "<span class='glyphicon glyphicon-pencil'> Edit</span>".html_safe, edit_expense_path(expense) %>
+								 <%= link_to "<span class='glyphicon glyphicon-trash'> Delelte</span>".html_safe, expense, method: :delete, data: { confirm: "Are yoy sure?" } %>
 							</div>
 						</td>
 						<% end %> 
@@ -84,3 +84,6 @@
 		</div>
 	</div>
 </div>
+
+
+   
