@@ -1,0 +1,7 @@
+<tr id="<%= expense.id %>">
+  <td><%= expense.name %></td>
+  <td><%= number_to_currency(expense.price, precision: 2) %></td>
+  <td>
+    <%= link_to "Editar", edit_expense_path(expense), remote: true %>
+  </td>
+</tr>

@@ -1,0 +1,44 @@
+<div id="expense-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+
+				<h4 class="modal-title"><%= title %></h4>
+			</div>
+			<%= form_for @expense, remote: true do |f| %>
+			<div class="modal-body">
+				<div class="form-group">
+					<%= f.text_field :concept, class: "form-control input-lg", placeholder: "Concepto" %>
+				</div>
+
+				<div class="form-group">
+					<%= f.text_field :value, class: "form-control input-lg", placeholder: "value" %>
+				</div>
+
+
+				<div class="form-group">
+					<%= f.text_field :date, class: "form-control input-lg", placeholder: "date" %>
+				</div>
+
+
+				<div class="form-group">
+					<%= f.text_field :type_expense, class: "form-control input-lg", placeholder: "type_expenseo" %>
+					<%= f.input :color, :as => :select, :collection => Wine.colors.keys.to_a %>
+				</div>
+
+				<div class="form-group">
+					<%= f.text_field :category_id, class: "form-control input-lg", placeholder: "category_id" %>
+				</div>
+
+			</div>
+
+			<div class="modal-footer">
+				<div class="form-group">
+					<%= link_to("Cancel", expenses_path, html_options: {"data-dismiss" => "modal", "aria-hidden" => "true"}, class: "btn btn-success" ) %>
+					<%= f.submit class: "btn btn-primary" %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>
