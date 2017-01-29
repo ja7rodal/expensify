@@ -15,7 +15,7 @@
 						</div>
 						<div class="col-sm-6">
 							<%= f.label :date %><br>
-							<%= f.text_field :date, class: "form-control", placeholder: "date" %>
+							<%= f.date_field :date, value: Date.current.strftime('%Y-%m-%d'), class: "form-control"%>
 						</div>
 					</div>
 
@@ -33,7 +33,7 @@
 						</div>
 						<div class="col-sm-6">	
 							<%= f.label "Amount" %><br>
-							<%= f.text_field :value, class: "form-control", placeholder: "value" %>
+							<%= f.number_field :value, class: "form-control", placeholder: "0" %>
 						</div>
 					</div>
 				</div>
