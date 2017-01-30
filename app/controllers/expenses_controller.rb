@@ -22,16 +22,21 @@ class ExpensesController < ApplicationController
 	end
 
 	def update
-		@expense = Expense.update(params[:id], expense_params)
+		@expense = Expense.find(params[:id])
+		if @expense.update(expense_params)
+			redirect_to expenses_path, notice: "Current Expense"
+		else
+			render :edit
+		end
 	end
-	
+
 	def destroy
 		expense = Expense.find(params[:id])
-    expense.destroy
+		expense.destroy
 
-    redirect_to expenses_path, notice: "Expense delete successfully"
+		redirect_to expenses_path, notice: "Expense delete successfully"
 	end
-	
+
 	private
 	def expense_params
 		params.require(:expense).permit(:concept, :value, :date, :type_expense, :category_id )
