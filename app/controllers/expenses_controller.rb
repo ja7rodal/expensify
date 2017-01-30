@@ -4,11 +4,8 @@ class ExpensesController < ApplicationController
 		@expenses = Expense.where('date >= ? ', Time.now.strftime('%Y-%m-01')).order(date: :desc )	
 
 		#		@expenses = Expense.where('date >= ? and date < ?', (Time.now-0.month).strftime("%Y-%m-01"), (Time.now+1.month).strftime("%Y-%m-01") ).order(date: :desc )
-		@date = Date.today
-		@months = []
-		(0..11).each do |m|
-			@months << [@date.prev_month(m).strftime("%b %Y"), @date.prev_month(m)]
-		end
+		#@date = Date.today
+
 	end
 
 	def new

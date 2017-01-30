@@ -34,12 +34,20 @@
 			<div class="row" style="margin-top: 20px;">
 				<div class="col-md-12">
 					<%= link_to "<span class='glyphicon glyphicon-plus'> New Expense</span>".html_safe, new_expense_path, remote: true, class: "btn btn-success pull-left" %>
-					<div><%= select_tag "month_year", options_for_select(@months) %></div>
+					
 					<h4 class="dropdown pull-right">
-						<button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">April 2016 <span class="caret"></span></button>
+						<button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
+						<% if params[:month].present? %>
+						<%= Date.new( params[:year].to_i ,params[:month].to_i).strftime("%b %Y") %>
+						<% else %>
+						<%= Date.today.strftime("%b %Y") %>
+						<% end %>
+						<span class="caret"></span></button>
 						<ul class="dropdown-menu" role="menu">
-							<li role="presentation"><a href="#">April 2016</a></li>
-							<li role="presentation"><a href="#">March 2016</a></li>
+							<% (0..11).each do |m| %>
+							<% date = Date.today.prev_month(m) %>
+							<li role="presentation"><%= link_to date.strftime("%b %Y") , expenses_path(month: date.month ,year: date.year ) %></li>
+							<% end %>
 							<!-- more months -->
 						</ul>
 					</h4>
@@ -57,7 +65,7 @@
 				</thead>
 				<tbody>
 					<% @expenses.each do |expense| %>
-						<%= render "row", expense: expense %>
+					<%= render "row", expense: expense %>
 					<% end %> 
 
 				</tbody>
