@@ -1,7 +1,10 @@
 class ExpensesController < ApplicationController
 
 	def index
-		@expenses = Expense.where('date >= ? AND date <= ?', DateTime.now.beginning_of_month, DateTime.now).order(date: :desc )
+		@expenses = Expense.where('date >= ? and date < ?', (Time.now-1.month).strftime("%Y-%m-01"), (Time.now+0.month).strftime("%Y-%m-01") ).order(date: :desc )
+		
+		@transactions = @expenses.count
+		@average = @expenses.average(:value)
 	end
 
 	def new

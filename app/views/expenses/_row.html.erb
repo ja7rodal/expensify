@@ -1,19 +1,19 @@
 <tr id="<%= expense.id %>">
 	<td class="date">
 		<div class="day"><%= expense.date.strftime("%d") %></div>
-		<div class="month"><%= expense.date.strftime("%B") %></div>
+		<div class="month"><%= expense.date.strftime("%b") %></div>
 	</td>
 	<td>
 		<div>
 			<span class="type"><%= expense.type_expense %></span>
 		</div>
 		<div>
-			<span class="concept"><%= expense.concept %></span>
+			<span class="concept"><%= expense.concept %> cre <%= expense.created_at%></span>
 		</div>
 	</td>
 	<td class="category text-right"><%= expense.category.category %></td>
 	<td class="text-right" style="width: 170px;">
-		<div class="amount"><%= expense.value%></div>
+		<div class="amount"><%= number_to_currency(expense.value, precision: 2 )%></div>
 		<div class="actions">
 			<%= link_to "<span class='glyphicon glyphicon-pencil'> Edit</span>".html_safe, edit_expense_path(expense), remote: true %>
 			<%= link_to "<span class='glyphicon glyphicon-trash'> Delelte</span>".html_safe, expense, method: :delete, data: { confirm: "Are yoy sure?" }, remote: true %>
