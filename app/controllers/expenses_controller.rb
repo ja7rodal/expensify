@@ -1,11 +1,12 @@
 class ExpensesController < ApplicationController
 
 	def index
-		@expenses = Expense.where('date >= ? ', Time.now.strftime('%Y-%m-01')).order(date: :desc )	
-
-		#		@expenses = Expense.where('date >= ? and date < ?', (Time.now-0.month).strftime("%Y-%m-01"), (Time.now+1.month).strftime("%Y-%m-01") ).order(date: :desc )
-		#@date = Date.today
-
+		#@expenses = Expense.all.order(date: :desc )
+		date = Time.now.strftime("%Y-%b-01").to_date;  
+		if params[:month].present? && params[:year].present?
+			date = Date.new(params[:year].to_i, params[:month].to_i, 1)
+		end
+		@expenses = Expense.months(date, date+1.month).order(date: :desc ) 
 	end
 
 	def new

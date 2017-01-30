@@ -13,12 +13,14 @@
 #
 
 class Expense < ApplicationRecord
-  belongs_to :category
-	
+	belongs_to :category
+
 	validates :concept, presence: true
 	validates :value, presence: true
 	validates :date, presence: true
-	
+
 	enum type_expense: [:Purchase, :Withdrawal, :Transfer, :Payment]
-	
+	#default_scope { where('date >= ? ', Time.now.strftime('%Y-%m-01'))  }
+	scope :months, -> (dateb, datef) { where("date >= ? AND date < ? ", dateb , datef)}
+
 end
