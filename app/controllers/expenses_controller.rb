@@ -6,7 +6,19 @@ class ExpensesController < ApplicationController
 		if params[:month].present? && params[:year].present?
 			date = Date.new(params[:year].to_i, params[:month].to_i, 1)
 		end
-		@expenses = Expense.months(date, date+1.month).order(date: :desc ) 
+		@expenses = Expense.months(date, date+1.month).order(date: :desc )
+		@expenses = @expenses.tipo(params[:tipo]) if params[:tipo].present?
+		@expenses = @expenses.category(params[:category]) if params[:category].present?
+		
+		@categories = Category.all
+		#flash: {year: params[:year], month: params[:month], tipo: params[:tipo] , category: params[:category]}
+		
+		flash[:year]= params[:year] 
+		flash[:month]= params[:month]
+		flash[:tipo]= params[:tipo]
+		flash[:category]= params[:category]
+		
+		
 	end
 
 	def new

@@ -3,17 +3,18 @@
 		<div class="col-md-3">
 			<h4 class="filter-header">Transaction Type <span>Choose to filter</span></h4>
 			<div class="list-group filter-type">
-				<a href="#" class="list-group-item"><%= Time.zone %></a>
-				<a href="#" class="list-group-item"><%= DateTime.now.beginning_of_day%></a>
+				<% Expense.type_expenses.each do |tipo|  %>
+				<%= link_to tipo[0], expenses_path(tipo: tipo[1]), remote: true, method: :get %>
 				<!-- more transaction types -->
+				<% end %>
 			</div>
-
 			<h4 class="filter-header">Categoría <span>Selecciona para filtrar</span></h4>
 			<div class="list-group filter-type">
-				<a href="#" class="list-group-item">Restaurants</a>
-				<a href="#" class="list-group-item">Car</a>
-				<!-- more categories  -->
-			</div>
+				<% @categories.each do |category| %>
+				<%= render "category", category: category %>
+				<% end %> 
+			</div>	
+
 		</div>
 		<div class="col-md-9 index-data">
 			<div class="row" style="margin-top: 10px;">
@@ -34,15 +35,15 @@
 			<div class="row" style="margin-top: 20px;">
 				<div class="col-md-12">
 					<%= link_to "<span class='glyphicon glyphicon-plus'> New Expense</span>".html_safe, new_expense_path, remote: true, class: "btn btn-success pull-left" %>
-					
+
 					<h4 class="dropdown pull-right">
 						<button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
-						<% if params[:month].present? %>
-						<%= Date.new( params[:year].to_i ,params[:month].to_i).strftime("%b %Y") %>
-						<% else %>
-						<%= Date.today.strftime("%b %Y") %>
-						<% end %>
-						<span class="caret"></span></button>
+							<% if params[:month].present? %>
+							<%= Date.new( params[:year].to_i ,params[:month].to_i).strftime("%b %Y") %>
+							<% else %>
+							<%= Date.today.strftime("%b %Y") %>
+							<% end %>
+							<span class="caret"></span></button>
 						<ul class="dropdown-menu" role="menu">
 							<% (0..11).each do |m| %>
 							<% date = Date.today.prev_month(m) %>
@@ -64,9 +65,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @expenses.each do |expense| %>
-					<%= render "row", expense: expense %>
-					<% end %> 
+
+					<%= render @expenses %>
+
 
 				</tbody>
 			</table>
