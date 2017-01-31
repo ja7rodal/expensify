@@ -11,13 +11,7 @@ class ExpensesController < ApplicationController
 		@expenses = @expenses.category(params[:category]) if params[:category].present?
 		
 		@categories = Category.all
-		#flash: {year: params[:year], month: params[:month], tipo: params[:tipo] , category: params[:category]}
-		
-		flash[:year]= params[:year] 
-		flash[:month]= params[:month]
-		flash[:tipo]= params[:tipo]
-		flash[:category]= params[:category]
-		
+	
 		
 	end
 
