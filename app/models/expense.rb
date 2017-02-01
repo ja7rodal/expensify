@@ -21,7 +21,7 @@ class Expense < ApplicationRecord
 
 	enum type_expense: [:Purchase, :Withdrawal, :Transfer, :Payment]
 	#default_scope { where('date >= ? ', Time.now.strftime('%Y-%m-01'))  }
-	scope :months, -> (dateb, datef) { where("date >= ? AND date < ? ", dateb , datef)}
+	scope :months, -> (dates) { where("date >= ? AND date <= ?  ", dates, dates.end_of_month)}
 	scope :tipo, -> (tipo) { where type_expense: tipo }
 	scope :category, -> (category) { where category_id: category }
 

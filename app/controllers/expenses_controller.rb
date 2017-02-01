@@ -1,18 +1,20 @@
 class ExpensesController < ApplicationController
 
 	def index
-		#@expenses = Expense.all.order(date: :desc )
-		date = Time.now.strftime("%Y-%b-01").to_date;  
-		if params[:month].present? && params[:year].present?
-			date = Date.new(params[:year].to_i, params[:month].to_i, 1)
-		end
-		@expenses = Expense.months(date, date+1.month).order(date: :desc )
+
+		@date =  params[:month].present? && params[:year].present? ? Date.new(params[:year].to_i, params[:month].to_i, 1) : Date.today.beginning_of_month
+		
+		@tipo = params[:tipo]
+		@cat = params[:category]
+		#cookies[:month] = params[:month].present? ? params[:month] : @date.strftime("%B")
+		#cookies[:year] = params[:year].present? ? params[:year] :  @date.strftime("%y")
+
+		@expenses = Expense.months(@date).order(date: :desc )
 		@expenses = @expenses.tipo(params[:tipo]) if params[:tipo].present?
 		@expenses = @expenses.category(params[:category]) if params[:category].present?
-		
+
 		@categories = Category.all
-	
-		
+
 	end
 
 	def new

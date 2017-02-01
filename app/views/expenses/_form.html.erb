@@ -15,7 +15,8 @@
 						</div>
 						<div class="col-sm-6">
 							<%= f.label :date %><br>
-							<%= f.date_field :date, value: Date.current.strftime('%Y-%m-%d'), class: "form-control"%>
+							
+							<%= f.date_field :date, value: Date.today, class: "form-control"%>
 						</div>
 					</div>
 

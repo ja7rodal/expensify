@@ -4,14 +4,14 @@
 			<h4 class="filter-header">Transaction Type <span>Choose to filter</span></h4>
 			<div class="list-group filter-type">
 				<% Expense.type_expenses.each do |tipo|  %>
-				<%= link_to tipo[0], expenses_path(tipo: tipo[1]), remote: true, method: :get %>
+				<%= link_to tipo[0], expenses_path(month: cookies[:month],year: cookies[:year],  category: @cat , tipo: tipo[1] ), class: "tipo list-group-item bg-default", remote: true %>
 				<!-- more transaction types -->
 				<% end %>
 			</div>
 			<h4 class="filter-header">Categoría <span>Selecciona para filtrar</span></h4>
 			<div class="list-group filter-type">
 				<% @categories.each do |category| %>
-				<%= render "category", category: category %>
+				<%= render "category", category: category, tipo: @tipo %>
 				<% end %> 
 			</div>	
 					
@@ -26,17 +26,12 @@
 					<%= link_to "<span class='glyphicon glyphicon-plus'> New Expense</span>".html_safe, new_expense_path, remote: true, class: "btn btn-success pull-left" %>
 
 					<h4 class="dropdown pull-right">
-						<button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">
-							<% if params[:month].present? %>
-							<%= Date.new( params[:year].to_i ,params[:month].to_i).strftime("%b %Y") %>
-							<% else %>
-							<%= Date.today.strftime("%b %Y") %>
-							<% end %>
+						<button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown"><span id ="months" ><%= @date.strftime("%b %Y")%></span>
 							<span class="caret"></span></button>
 						<ul class="dropdown-menu" role="menu">
 							<% (0..11).each do |m| %>
 							<% date = Date.today.prev_month(m) %>
-							<li role="presentation"><%= link_to date.strftime("%b %Y") , expenses_path(month: date.month ,year: date.year ) %></li>
+							<li role="presentation"><%= link_to date.strftime("%b %Y") , expenses_path(month: date.month ,year: date.year ), remote: true%></li>
 							<% end %>
 							<!-- more months -->
 						</ul>

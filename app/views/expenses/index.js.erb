@@ -1,2 +1,8 @@
+
 $('table tbody').html('<%= j render @expenses %>');
-$('#operations').html('<%= j render  "operations" %>'); 
+$('#operations').html('<%= j render  "operations" %>');
+$('#months').html('<%=  j @date.strftime("%b %Y") %> ');
+$('#months').on('click', function(){
+	$('.dropdown-menu').show();
+});
+$('.dropdown-menu').hide();
